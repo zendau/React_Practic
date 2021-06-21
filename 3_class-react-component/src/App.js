@@ -36,6 +36,9 @@ class App extends React.Component {
       return item
     })
 
+    this.setState = (prevState) => {
+      console.log("prevState", prevState)
+    }
 
    this.setState({
      cards: newCards
