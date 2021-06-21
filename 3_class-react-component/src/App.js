@@ -2,6 +2,8 @@ import React from "react"
 
 import Card from "./Card"
 
+import "./App.css"
+
 class App extends React.Component {
 
   constructor(props) {
@@ -21,6 +23,7 @@ class App extends React.Component {
           }
       ] 
     }
+    console.log("constructor");
  }
 
  onTestClick(event) {
@@ -74,9 +77,32 @@ class App extends React.Component {
     })
   }
 
+  static getDerivedStateFromProps(props, state) {
+    console.log("getDerivedStateFromProps()")
+    return null;
+  }
+  componentDidMount(){
+    console.log("componentDidMount()")
+  }
+  componentWillUnmount(){
+    console.log("componentWillUnmount()")
+  }
+  shouldComponentUpdate(){
+    console.log("shouldComponentUpdate()")
+    return true;
+  }
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log("getSnapshotBeforeUpdate()")
+    return null;
+  }
+  componentDidUpdate(){
+    console.log("componentDidUpdate()")
+  }
+
   render() {
+    console.log("render()")
     return (
-      <div>
+      <div className="test">
         {this.state.cards.map((item, index) => 
           <Card 
             printText={this.printTextEvent}
