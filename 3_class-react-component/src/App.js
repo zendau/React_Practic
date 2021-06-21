@@ -4,6 +4,8 @@ import Card from "./Card"
 
 import "./App.css"
 
+import ErrorBoundary from "./ErrorBoundary "
+
 class App extends React.Component {
 
   constructor(props) {
@@ -23,7 +25,8 @@ class App extends React.Component {
           }
       ] 
     }
-    console.log("constructor");
+    console.log("constructor")
+
  }
 
  onTestClick(event) {
@@ -104,6 +107,7 @@ class App extends React.Component {
     return (
       <div className="test">
         {this.state.cards.map((item, index) => 
+        <ErrorBoundary key={index}>
           <Card 
             printText={this.printTextEvent}
             changeTitle={(event) => this.onChangeTitle(event, index)}
@@ -113,8 +117,8 @@ class App extends React.Component {
             key={index}
           >
             {item.desk}
-        </Card>
-          
+          </Card>
+        </ErrorBoundary>  
           )}
         
         <button onClick={this.onTestClick.bind(this)} >Test event</button>
