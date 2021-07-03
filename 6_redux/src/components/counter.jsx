@@ -2,6 +2,8 @@ import React from 'react'
 
 import {connect} from "react-redux"
 
+import {add, sub, addFive, incrementAsync} from "../redux/actions/action"
+
 function counter(props) {
     console.log(props)
     return (
@@ -11,6 +13,8 @@ function counter(props) {
             <button onClick={() => props.sub()}>Sub</button>
 
             <button onClick={() => props.addFive(5)}>Add Five</button>
+
+            <button onClick={() => props.addFive(50)}>Async Inc</button>
         </div>
     )
 }
@@ -24,9 +28,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        add: () => dispatch({type: "ADD"}),
-        sub: () => dispatch({type: "SUB"}),
-        addFive: (num) => dispatch({type: "ADDFIVE", value: num}),
+        add: () => dispatch(add()),
+        sub: () => dispatch(sub()),
+        addFive: (num) => dispatch(addFive(num)),
+        asyncInc: (num) => dispatch(incrementAsync(num))
     }
 }
 

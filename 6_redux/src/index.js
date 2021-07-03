@@ -5,12 +5,27 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { Provider } from 'react-redux'
-import {createStore} from "redux"
+import {createStore, applyMiddleware, compose} from "redux"
 import reduser from "./redux/rootRedux"
+import thunk from "redux-thunk"
 
 
+const composeEnhancers =
+  typeof window === 'object' &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+    }) : compose;
 
-const store = createStore(reduser)
+
+const loggerMiddleware = store => next => action => {
+  const res = next(action)
+  console.log("Middleware", store.getState())
+  return res
+}
+
+const store = createStore(reduser, composeEnhancers(applyMiddleware(thunk, loggerMiddleware)))
+
 
 ReactDOM.render(
   <Provider store={store}>
